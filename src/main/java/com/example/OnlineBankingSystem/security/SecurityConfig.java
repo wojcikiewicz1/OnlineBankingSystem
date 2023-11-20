@@ -33,6 +33,9 @@ public class SecurityConfig {
                                 .requestMatchers("/menu").authenticated()
                                 .requestMatchers("/checkingAccount").authenticated()
                                 .requestMatchers("/savingsAccount").authenticated()
+                                .requestMatchers("/deposit/**").authenticated()
+                                .requestMatchers("/withdraw/**").authenticated()
+                                .requestMatchers("/betweenAccountsTransfer/**").authenticated()
                                 .requestMatchers("/successoperation").authenticated()
 
                 ).formLogin(
