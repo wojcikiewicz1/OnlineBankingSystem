@@ -31,7 +31,7 @@ public class UserService {
         user1.setEmail(user.getEmail());
         user1.setFirstName(user.getFirstName());
         user1.setLastName(user.getLastName());
-        user1.setRecipients(user.getRecipients());
+        user1.setRecipientList(user.getRecipientList());
         user1.setCheckingAccount(accountService.createCheckingAccount());
         user1.setSavingsAccount(accountService.createSavingsAccount());
 

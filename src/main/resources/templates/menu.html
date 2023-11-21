@@ -11,14 +11,32 @@
           crossorigin="anonymous">
 </head>
 <body>
-<h1>MENU</h1>
-<button type="submit"><a th:href="@{/checkingAccount}"> Konto rozliczeniowe</a></button>
-<button type="submit"><a th:href="@{/savingsAccount}"> Konto oszczędnosciowe</a></button>
-<button type="submit"><a th:href="@{/deposit}"> Wpłata środków</a></button>
-<button type="submit"><a th:href="@{/withdraw}"> Wypłata środków</a></button>
-<button type="submit"><a th:href="@{/betweenAccountsTransfer}"> Przelew własny</a></button>
-<button type="submit"><a th:href="@{/regularTransfer}"> Przelew zwykły</a></button>
-<button type="submit"><a th:href="@{/logout}"> Wyjście</a></button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container main">
+    <div class="row col-md-8 offset-md-2">
 
-</body>
+        <div class="card-header">
+            <h3>MENU</h3>
+        </div>
+
+        <div class="card-body">
+            <a th:href="@{/checkingAccount}" class="btn btn-primary" role="button"> Checking Account </a>
+            <a th:href="@{/savingsAccount}" class="btn btn-primary" role="button"> Savings Account </a>
+            <a th:href="@{/deposit}" class="btn btn-primary" role="button"> Deposit </a>
+            <a th:href="@{/withdraw}" class="btn btn-primary" role="button"> Withdraw </a>
+            <a th:href="@{/betweenAccountsTransfer}" class="btn btn-primary" role="button"> Own Transfer </a>
+            <a th:href="@{/regularTransfer}" class="btn btn-primary" role="button"> Regular Transfer </a>
+        </div>
+    </div>
+</div>
 </html>

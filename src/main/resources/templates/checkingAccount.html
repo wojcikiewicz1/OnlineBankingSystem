@@ -12,12 +12,22 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container main">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-
+            <br>
             <h1>Your checking account balance: </h1>
-
             <br>
 
             <div class="col-xs-6 text-right">
@@ -26,7 +36,7 @@
 
             <br>
             <br>
-
+            <h3>Transactions' history</h3>
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-hover table-striped">
                     <thead>
@@ -53,8 +63,7 @@
             </div>
 
             <div class="form-group mb-3">
-                <button type="submit" class="btn btn-primary"><a th:href="@{/menu}"> Back to menu</a></button>
-                <button type="submit" class="btn btn-primary"><a th:href="@{/logout}"> Exit</a></button>
+                <a th:href="@{/menu}" class="btn btn-primary" role="button"> Menu </a>
             </div>
 
         </div>

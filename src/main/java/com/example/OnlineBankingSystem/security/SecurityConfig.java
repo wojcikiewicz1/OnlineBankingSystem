@@ -36,6 +36,8 @@ public class SecurityConfig {
                                 .requestMatchers("/deposit/**").authenticated()
                                 .requestMatchers("/withdraw/**").authenticated()
                                 .requestMatchers("/betweenAccountsTransfer/**").authenticated()
+                                .requestMatchers("/regularTransfer/**").authenticated()
+                                .requestMatchers("/recipient/**").authenticated()
                                 .requestMatchers("/successoperation").authenticated()
 
                 ).formLogin(

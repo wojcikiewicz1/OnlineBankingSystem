@@ -52,7 +52,7 @@ public class User {
             joinColumns = @JoinColumn(name ="user_id"),
             inverseJoinColumns = @JoinColumn(name = "recipient_id")
     )
-    private List<Recipient> recipients;
+    private List<Recipient> recipientList;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

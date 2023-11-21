@@ -11,6 +11,17 @@
           crossorigin="anonymous">
 </head>
 <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container main">
     <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -25,6 +36,7 @@
 
             <form th:action="@{/deposit/save}" method="post">
 
+                <br>
                 <div class="form-group mb-3" >
                     <label for="accountType">Select the account you would like to deposit:</label>
                     <select
@@ -55,6 +67,7 @@
                 <br>
 
                 <div class="form-group mb-3">
+                    <a th:href="@{/menu}" class="btn btn-primary" role="button"> Back To Menu </a>
                     <button type="submit" class="btn btn-primary" >Deposit</button>
                 </div>
 

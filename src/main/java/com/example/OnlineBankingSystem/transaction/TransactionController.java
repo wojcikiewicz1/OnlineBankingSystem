@@ -2,6 +2,8 @@ package com.example.OnlineBankingSystem.transaction;
 
 import com.example.OnlineBankingSystem.account.CheckingAccount;
 import com.example.OnlineBankingSystem.account.SavingsAccount;
+import com.example.OnlineBankingSystem.recipient.Recipient;
+import com.example.OnlineBankingSystem.recipient.RecipientService;
 import com.example.OnlineBankingSystem.user.User;
 import com.example.OnlineBankingSystem.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.security.Principal;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class TransactionController {
@@ -24,6 +26,9 @@ public class TransactionController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RecipientService recipientService;
 
     @GetMapping("/deposit")
     public String showDepositForm (Model model) {
@@ -123,7 +128,7 @@ public class TransactionController {
 
         if (transferFrom.isEmpty() || transferTo.isEmpty()) {
             result.hasErrors();
-            return "redirect:/withdraw?error1";
+            return "redirect:/betweenAccountsTransfer?error1";
         }
 
         if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
@@ -133,6 +138,63 @@ public class TransactionController {
         }
 
         transactionService.betweenAccountsTransfer(transferFrom, transferTo, title, amount, checkingAccount, savingsAccount);
+
+        return "redirect:/successoperation";
+    }
+
+    @GetMapping ("/regularTransfer")
+    public String showRegularTransferForm(Model model, Principal principal) {
+
+        List<Recipient> recipientList = recipientService.findRecipientList(principal);
+
+        model.addAttribute("TransferFrom", "");
+        model.addAttribute("TransferTo", recipientList);
+        model.addAttribute("title", "");
+        model.addAttribute("amount", "");
+
+        return "regularTransfer";
+    }
+
+    @PostMapping ("/regularTransfer/save")
+    public String showRegularTransferForm(@ModelAttribute("TransferFrom") String transferFrom,
+                                          @ModelAttribute("TransferTo") String transferTo,
+                                          @ModelAttribute("title") String title,
+                                          @ModelAttribute("amount") BigDecimal amount,
+                                          Principal principal, BindingResult result) throws Exception {
+
+        User user = userService.findByUserName(principal.getName());
+        CheckingAccount checkingAccount = user.getCheckingAccount();
+        SavingsAccount savingsAccount = user.getSavingsAccount();
+
+//        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+//            result.hasErrors();
+//            return "redirect:/regularTransfer?error";
+//        }
+//
+//        if (transferFrom.isEmpty()) {
+//            result.hasErrors();
+//            return "redirect:/regularTransfer?error1";
+//        }
+//
+//        if (transferTo.isEmpty()) {
+//            result.hasErrors();
+//            return "redirect:/regularTransfer?error4";
+//        }
+//
+//        if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
+//                (transferFrom.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0)) {
+//            result.hasErrors();
+//            return "redirect:/regularTransfer?error2";
+//        }
+//
+//        //??????????????????????????????????????
+//        if (amount == null) {
+//            result.hasErrors();
+//            return "redirect:/regularTransfer?error3";
+//        }
+
+        Recipient recipient = recipientService.findRecipientByName(transferTo);
+        transactionService.regularTransfer(transferFrom, transferTo, recipient, principal, title, amount, checkingAccount, savingsAccount);
 
         return "redirect:/successoperation";
     }

@@ -23,4 +23,8 @@ public class Recipient {
     private String name;
     @Column(unique = true)
     private int accountNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

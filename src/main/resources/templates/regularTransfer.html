@@ -4,7 +4,7 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>Withdraw</title>
+    <title>Between Accounts Transfer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
@@ -42,16 +42,21 @@
                 <div class="alert alert-info"> You must enter the amount!!!</div>
             </div>
 
-            <form th:action="@{/withdraw/save}" method="post">
+            <div th:if="${param.error4}">
+                <div class="alert alert-info"> You must enter the recipient!!!</div>
+            </div>
+
+            <form th:action="@{/regularTransfer/save}" method="post">
 
                 <br>
+
                 <div class="form-group mb-3" >
-                    <label for="accountType">Select the account from witch you would like to withdraw:</label>
+                    <label for="transferFrom">Select the account you would like to transfer from:</label>
                     <select
                             class="form-control"
-                            id="accountType"
-                            name="accountType"
-                            th:value="${accountType}"
+                            id="transferFrom"
+                            name="transferFrom"
+                            th:value="${transferFrom}"
                             required="required">
 
                         <option disabled="disabled" selected="selected"> -- select your account -- </option>
@@ -61,22 +66,55 @@
                     <br />
                 </div>
 
+                <div class="form-group mb-3" >
+                    <label for="transferTo">Select the recipient:</label>
+                    <select
+                            class="form-control"
+                            id="transferTo"
+                            name="transferTo"
+                            th:value="${transferTo}"
+                            required="required"
+                    >
+
+                        <option disabled="disabled" selected="selected"> -- select the recipient -- </option>
+                        <option th:each="Recipient : ${TransferTo}"
+                                th:text="${Recipient.name}"
+                                th:value="${Recipient.name}"></option>
+                    </select>
+                    <br />
+                    <a th:href="@{/recipient}" class="btn btn-primary" role="button"> Add recipient </a>
+                </div>
+
+                <div class="form-group mb-3" >
+                    <label for="title">Enter the title:</label>
+                    <input
+                            class="form-control"
+                            id="title"
+                            name="title"
+                            th:value="${title}"
+                            type="text"
+                            required="required"
+                    >
+                    <br />
+                </div>
+
                 <div class="form-group mb-3">
-                    <label>Please specify the amount you would like to withdraw: </label>
+                    <label>Specify the amount you would like to transfer: </label>
                     <input
                             class="form-control"
                             id="amount"
                             name="amount"
                             th:value="${amount}"
                             type="number"
-                    />
+                            required="required"
+                    >
                 </div>
 
                 <br>
 
                 <div class="form-group mb-3">
                     <a th:href="@{/menu}" class="btn btn-primary" role="button"> Back To Menu </a>
-                    <button type="submit" class="btn btn-primary" >Withdraw</button>
+                    <button type="submit" class="btn btn-primary" >Transfer</button>
                 </div>
 
             </form>
