@@ -31,6 +31,24 @@
                 <br>
 
                 <div class="form-group mb-3" >
+                    <label for="transferFrom">Select the recipient:</label>
+                    <select
+                            class="form-control"
+                            id="transferFrom"
+                            name="transferFrom"
+                            th:value="${transferFrom}"
+                            required="required"
+                    >
+
+                        <option disabled="disabled" selected="selected"> Select your account </option>
+                        <option value="Checking">Checking</option>
+                        <option value="Savings">Savings</option>
+                    </select>
+
+                    <br />
+                </div>
+
+                <div class="form-group mb-3" >
                     <label for="recipientName">Select the account you would like to transfer from:</label>
                     <select
                             class="form-control"
@@ -44,23 +62,6 @@
                                 th:text="${Recipient.name}"
                         ></option>
 
-                    </select>
-                    <br />
-                </div>
-
-                <div class="form-group mb-3" >
-                    <label for="accountType">Select the recipient:</label>
-                    <select
-                            class="form-control"
-                            id="accountType"
-                            name="accountType"
-                            th:value="${accountType}"
-                            required="required"
-                    >
-
-                        <option disabled="disabled" selected="selected"> Select your account </option>
-                        <option value="Checking">Checking</option>
-                        <option value="Savings">Savings</option>
                     </select>
                     <br />
                     <a th:href="@{/recipient}" class="btn btn-primary" role="button"> Add recipient </a>

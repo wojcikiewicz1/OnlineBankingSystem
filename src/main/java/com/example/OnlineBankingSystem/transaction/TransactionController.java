@@ -147,15 +147,17 @@ public class TransactionController {
 
         List<Recipient> recipientList = recipientService.findRecipientList(principal);
 
-        model.addAttribute("accountType", "");
+        model.addAttribute("transferFrom", "");
         model.addAttribute("recipientList", recipientList);
+        model.addAttribute("title", "");
+        model.addAttribute("amount", "");
 
         return "regularTransfer";
     }
 
     @PostMapping ("/regularTransfer/save")
-    public String RegularTransfer(@ModelAttribute("recipientName") String recipientName,
-                                  @ModelAttribute("accountType") String accountType,
+    public String RegularTransfer(@ModelAttribute("transferFrom") String transferFrom,
+                                  @ModelAttribute("recipientName") String recipientName,
                                   @ModelAttribute("title") String title,
                                   @ModelAttribute("amount") BigDecimal amount,
                                   Principal principal) throws Exception {
@@ -166,7 +168,7 @@ public class TransactionController {
 
 
         Recipient recipient = recipientService.findRecipientByName(recipientName);
-        transactionService.regularTransfer(recipient, accountType, title, amount, checkingAccount, savingsAccount);
+        transactionService.regularTransfer(transferFrom, recipient, title, amount, checkingAccount, savingsAccount);
 
         return "redirect:/successoperation";
     }

@@ -159,30 +159,29 @@ public class TransactionService {
             throw new Exception();
     }
 
-    public void regularTransfer (Recipient recipient, String accountType, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
+    public void regularTransfer (String transferFrom, Recipient recipient, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
 
-        if (accountType.equals("Checking")) {
+        if (transferFrom.equals("Checking")) {
 
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
 
             CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
             checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom(accountType);
+            checkingAccountTransaction.setTransferFrom(transferFrom);
             checkingAccountTransaction.setTransferTo(recipient.getName());
             checkingAccountTransaction.setTitle(title);
             checkingAccountTransaction.setAmount(amount);
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
-//
-        } else if (accountType.equals("Savings")) {
+        } else if (transferFrom.equals("Savings")) {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
 
             SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
             savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom(accountType);
+            savingsAccountTransaction.setTransferFrom(transferFrom);
             savingsAccountTransaction.setTransferTo(recipient.getName());
             savingsAccountTransaction.setTitle(title);
             savingsAccountTransaction.setAmount(amount);
