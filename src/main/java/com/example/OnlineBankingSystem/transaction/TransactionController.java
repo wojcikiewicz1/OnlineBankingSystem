@@ -111,11 +111,11 @@ public class TransactionController {
     }
 
     @PostMapping("/betweenAccountsTransfer/save")
-    public String showBetweenAccountsTransferForm(@ModelAttribute("transferFrom") String transferFrom,
-                                                  @ModelAttribute("transferTo") String transferTo,
-                                                  @ModelAttribute("title") String title,
-                                                  @ModelAttribute("amount")BigDecimal amount,
-                                                  Principal principal, BindingResult result) throws Exception {
+    public String BetweenAccountsTransfer(@ModelAttribute("transferFrom") String transferFrom,
+                                          @ModelAttribute("transferTo") String transferTo,
+                                          @ModelAttribute("title") String title,
+                                          @ModelAttribute("amount")BigDecimal amount,
+                                          Principal principal, BindingResult result) throws Exception {
 
         User user = userService.findByUserName(principal.getName());
         CheckingAccount checkingAccount = user.getCheckingAccount();
@@ -156,45 +156,19 @@ public class TransactionController {
     }
 
     @PostMapping ("/regularTransfer/save")
-    public String showRegularTransferForm(@ModelAttribute("TransferFrom") String transferFrom,
-                                          @ModelAttribute("TransferTo") String transferTo,
-                                          @ModelAttribute("title") String title,
-                                          @ModelAttribute("amount") BigDecimal amount,
-                                          Principal principal, BindingResult result) throws Exception {
+    public String RegularTransfer(@ModelAttribute("TransferFrom") String transferFrom,
+                                  @ModelAttribute("TransferTo") String transferTo,
+                                  @ModelAttribute("title") String title,
+                                  @ModelAttribute("amount") BigDecimal amount,
+                                  Principal principal) throws Exception {
 
         User user = userService.findByUserName(principal.getName());
         CheckingAccount checkingAccount = user.getCheckingAccount();
         SavingsAccount savingsAccount = user.getSavingsAccount();
 
-//        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
-//            result.hasErrors();
-//            return "redirect:/regularTransfer?error";
-//        }
-//
-//        if (transferFrom.isEmpty()) {
-//            result.hasErrors();
-//            return "redirect:/regularTransfer?error1";
-//        }
-//
-//        if (transferTo.isEmpty()) {
-//            result.hasErrors();
-//            return "redirect:/regularTransfer?error4";
-//        }
-//
-//        if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
-//                (transferFrom.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0)) {
-//            result.hasErrors();
-//            return "redirect:/regularTransfer?error2";
-//        }
-//
-//        //??????????????????????????????????????
-//        if (amount == null) {
-//            result.hasErrors();
-//            return "redirect:/regularTransfer?error3";
-//        }
 
         Recipient recipient = recipientService.findRecipientByName(transferTo);
-        transactionService.regularTransfer(transferFrom, transferTo, recipient, principal, title, amount, checkingAccount, savingsAccount);
+        transactionService.regularTransfer(transferFrom, transferTo, title, amount, checkingAccount, savingsAccount);
 
         return "redirect:/successoperation";
     }

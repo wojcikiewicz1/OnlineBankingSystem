@@ -46,6 +46,7 @@
                             placeholder="Enter recipient name"
                             th:field="*{name}"
                             type="text"
+                            required="required"
                     />
                 </div>
 
@@ -58,6 +59,7 @@
                             placeholder="Enter account number"
                             th:field="*{accountNumber}"
                             type="text"
+                            required="required"
                     />
                 </div>
                 <a th:href="@{/regularTransfer}" class="btn btn-primary" role="button"> Back To Transaction </a>

@@ -47,7 +47,7 @@
                             th:value="${transferFrom}"
                             required="required">
 
-                        <option disabled="disabled" selected="selected"> -- select your account -- </option>
+                        <option disabled="disabled" selected="selected">Select your account</option>
                         <option value="Checking">Checking</option>
                         <option value="Savings">Savings</option>
                     </select>
@@ -61,9 +61,10 @@
                             id="transferTo"
                             name="transferTo"
                             th:value="${transferTo}"
-                            required="required">
+                            required="required"
+                    >
 
-                        <option disabled="disabled" selected="selected"> -- select your account -- </option>
+                        <option disabled="disabled" selected="selected">Select your account</option>
                         <option value="Checking">Checking</option>
                         <option value="Savings">Savings</option>
                     </select>
@@ -91,6 +92,7 @@
                             name="amount"
                             th:value="${amount}"
                             type="number"
+                            required="required"
                     />
                 </div>
 

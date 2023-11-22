@@ -46,12 +46,7 @@ public class User {
     @OneToOne
     private SavingsAccount savingsAccount;
 
-    @OneToMany
-    @JoinTable(
-            name = "users_recipients",
-            joinColumns = @JoinColumn(name ="user_id"),
-            inverseJoinColumns = @JoinColumn(name = "recipient_id")
-    )
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Recipient> recipientList;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -1,5 +1,6 @@
 package com.example.OnlineBankingSystem.recipient;
 
+import com.example.OnlineBankingSystem.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class RecipientService {
     private RecipientRepository recipientRepository;
 
     public Recipient findRecipientByName(String recipientName) {
+
         return recipientRepository.findByName(recipientName);
     }
 

@@ -26,26 +26,6 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
 
-            <div th:if="${param.error}">
-                <div class="alert alert-info"> The amount must be greater than zero!!!</div>
-            </div>
-
-            <div th:if="${param.error1}">
-                <div class="alert alert-info"> Please select the account type!!!</div>
-            </div>
-
-            <div th:if="${param.error2}">
-                <div class="alert alert-info"> There are not that many funds in the account!!!</div>
-            </div>
-
-            <div th:if="${param.error3}">
-                <div class="alert alert-info"> You must enter the amount!!!</div>
-            </div>
-
-            <div th:if="${param.error4}">
-                <div class="alert alert-info"> You must enter the recipient!!!</div>
-            </div>
-
             <form th:action="@{/regularTransfer/save}" method="post">
 
                 <br>
@@ -59,7 +39,7 @@
                             th:value="${transferFrom}"
                             required="required">
 
-                        <option disabled="disabled" selected="selected"> -- select your account -- </option>
+                        <option disabled="disabled" selected="selected"> Select your account </option>
                         <option value="Checking">Checking</option>
                         <option value="Savings">Savings</option>
                     </select>
@@ -76,10 +56,10 @@
                             required="required"
                     >
 
-                        <option disabled="disabled" selected="selected"> -- select the recipient -- </option>
+                        <option disabled="disabled" selected="selected"> Select the recipient </option>
                         <option th:each="Recipient : ${TransferTo}"
                                 th:text="${Recipient.name}"
-                                th:value="${Recipient.name}"></option>
+                                ></option>
                     </select>
                     <br />
                     <a th:href="@{/recipient}" class="btn btn-primary" role="button"> Add recipient </a>
