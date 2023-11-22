@@ -159,36 +159,31 @@ public class TransactionService {
             throw new Exception();
     }
 
-    public void regularTransfer (String transferFrom, String transferTo, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
+    public void regularTransfer (Recipient recipient, String accountType, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
 
-        if (transferFrom.equals("Checking")) {
+        if (accountType.equals("Checking")) {
 
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
 
             CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
             checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom(transferFrom);
-            checkingAccountTransaction.setTransferTo(transferTo);
+            checkingAccountTransaction.setTransferFrom(accountType);
+            checkingAccountTransaction.setTransferTo(recipient.getName());
             checkingAccountTransaction.setTitle(title);
             checkingAccountTransaction.setAmount(amount);
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
-//            if (checkingAccountRepository.findByAccountNumber(checkingAccount.getAccountNumber()).equals(recipient.getAccountNumber())) {
 //
-//            } else if (savingsAccountRepository.findByAccountNumber(savingsAccount.getAccountNumber()).equals(recipient.getAccountNumber())) {
-//
-//            }
-
-        } else if (transferFrom.equals("Savings")) {
+        } else if (accountType.equals("Savings")) {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
 
             SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
             savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom(transferFrom);
-            savingsAccountTransaction.setTransferTo(transferTo);
+            savingsAccountTransaction.setTransferFrom(accountType);
+            savingsAccountTransaction.setTransferTo(recipient.getName());
             savingsAccountTransaction.setTitle(title);
             savingsAccountTransaction.setAmount(amount);
             savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());

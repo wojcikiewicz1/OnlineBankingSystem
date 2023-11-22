@@ -31,35 +31,36 @@
                 <br>
 
                 <div class="form-group mb-3" >
-                    <label for="transferFrom">Select the account you would like to transfer from:</label>
+                    <label for="recipientName">Select the account you would like to transfer from:</label>
                     <select
                             class="form-control"
-                            id="transferFrom"
-                            name="transferFrom"
-                            th:value="${transferFrom}"
+                            id="recipientName"
+                            name="recipientName"
+                            th:value="${recipientName}"
                             required="required">
 
-                        <option disabled="disabled" selected="selected"> Select your account </option>
-                        <option value="Checking">Checking</option>
-                        <option value="Savings">Savings</option>
+                        <option disabled="disabled" selected="selected"> Select the recipient </option>
+                        <option th:each="Recipient : ${recipientList}"
+                                th:text="${Recipient.name}"
+                        ></option>
+
                     </select>
                     <br />
                 </div>
 
                 <div class="form-group mb-3" >
-                    <label for="transferTo">Select the recipient:</label>
+                    <label for="accountType">Select the recipient:</label>
                     <select
                             class="form-control"
-                            id="transferTo"
-                            name="transferTo"
-                            th:value="${transferTo}"
+                            id="accountType"
+                            name="accountType"
+                            th:value="${accountType}"
                             required="required"
                     >
 
-                        <option disabled="disabled" selected="selected"> Select the recipient </option>
-                        <option th:each="Recipient : ${TransferTo}"
-                                th:text="${Recipient.name}"
-                                ></option>
+                        <option disabled="disabled" selected="selected"> Select your account </option>
+                        <option value="Checking">Checking</option>
+                        <option value="Savings">Savings</option>
                     </select>
                     <br />
                     <a th:href="@{/recipient}" class="btn btn-primary" role="button"> Add recipient </a>
