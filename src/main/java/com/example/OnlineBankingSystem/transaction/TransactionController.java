@@ -1,7 +1,9 @@
 package com.example.OnlineBankingSystem.transaction;
 
 import com.example.OnlineBankingSystem.account.CheckingAccount;
+import com.example.OnlineBankingSystem.account.CheckingAccountRepository;
 import com.example.OnlineBankingSystem.account.SavingsAccount;
+import com.example.OnlineBankingSystem.account.SavingsAccountRepository;
 import com.example.OnlineBankingSystem.recipient.Recipient;
 import com.example.OnlineBankingSystem.recipient.RecipientService;
 import com.example.OnlineBankingSystem.user.User;
@@ -29,6 +31,9 @@ public class TransactionController {
 
     @Autowired
     private RecipientService recipientService;
+
+    @Autowired
+    private SavingsAccountRepository savingsAccountRepository;
 
     @GetMapping("/deposit")
     public String showDepositForm (Model model) {
@@ -162,12 +167,13 @@ public class TransactionController {
                                   @ModelAttribute("amount") BigDecimal amount,
                                   Principal principal) throws Exception {
 
+
         User user = userService.findByUserName(principal.getName());
         CheckingAccount checkingAccount = user.getCheckingAccount();
         SavingsAccount savingsAccount = user.getSavingsAccount();
 
 
-        Recipient recipient = recipientService.findRecipientByName(recipientName);
+        Recipient recipient = recipientService.findRecipientByName(recipientName, user.getId());
         transactionService.regularTransfer(transferFrom, recipient, title, amount, checkingAccount, savingsAccount);
 
         return "redirect:/successoperation";

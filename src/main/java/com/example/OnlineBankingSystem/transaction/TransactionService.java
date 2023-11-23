@@ -1,9 +1,6 @@
 package com.example.OnlineBankingSystem.transaction;
 
-import com.example.OnlineBankingSystem.account.CheckingAccount;
-import com.example.OnlineBankingSystem.account.CheckingAccountRepository;
-import com.example.OnlineBankingSystem.account.SavingsAccount;
-import com.example.OnlineBankingSystem.account.SavingsAccountRepository;
+import com.example.OnlineBankingSystem.account.*;
 import com.example.OnlineBankingSystem.recipient.Recipient;
 import com.example.OnlineBankingSystem.recipient.RecipientService;
 import com.example.OnlineBankingSystem.user.User;
@@ -35,6 +32,9 @@ public class TransactionService {
 
     @Autowired
     private RecipientService recipientService;
+
+    @Autowired
+    private AccountService accountService;
 
 
 
@@ -175,6 +175,18 @@ public class TransactionService {
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
+            CheckingAccount recipientCheckingAccount = checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber());
+            SavingsAccount recipientSavingsAccount = savingsAccountRepository.findByAccountNumber(recipient.getAccountNumber());
+
+            if (recipientCheckingAccount != null && recipient.getAccountNumber() == recipientCheckingAccount.getAccountNumber()) {
+                recipientCheckingAccount.setBalance(recipientCheckingAccount.getBalance().add(amount));
+                checkingAccountRepository.save(recipientCheckingAccount);
+
+            } else if (recipientSavingsAccount != null &&recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
+                recipientSavingsAccount.setBalance(recipientSavingsAccount.getBalance().add(amount));
+                savingsAccountRepository.save(recipientSavingsAccount);
+            }
+
         } else if (transferFrom.equals("Savings")) {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
@@ -187,6 +199,18 @@ public class TransactionService {
             savingsAccountTransaction.setAmount(amount);
             savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
+
+            CheckingAccount recipientCheckingAccount = checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber());
+            SavingsAccount recipientSavingsAccount = savingsAccountRepository.findByAccountNumber(recipient.getAccountNumber());
+
+            if (recipientCheckingAccount != null && recipient.getAccountNumber() == recipientCheckingAccount.getAccountNumber()) {
+                recipientCheckingAccount.setBalance(recipientCheckingAccount.getBalance().add(amount));
+                checkingAccountRepository.save(recipientCheckingAccount);
+
+            } else if (recipientSavingsAccount != null &&recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
+                recipientSavingsAccount.setBalance(recipientSavingsAccount.getBalance().add(amount));
+                savingsAccountRepository.save(recipientSavingsAccount);
+            }
 
         } else {
             throw new Exception();

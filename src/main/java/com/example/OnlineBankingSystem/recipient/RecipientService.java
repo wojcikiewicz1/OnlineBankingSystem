@@ -1,6 +1,7 @@
 package com.example.OnlineBankingSystem.recipient;
 
 import com.example.OnlineBankingSystem.user.User;
+import com.example.OnlineBankingSystem.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,8 @@ public class RecipientService {
     @Autowired
     private RecipientRepository recipientRepository;
 
-    public Recipient findRecipientByName(String recipientName) {
-
-        return recipientRepository.findByName(recipientName);
+    public Recipient findRecipientByName(String recipientName, Long id) {
+        return recipientRepository.findByName(recipientName, id);
     }
 
     public List<Recipient> findRecipientList(Principal principal) {
@@ -34,9 +34,7 @@ public class RecipientService {
     }
 
     public void deleteRecipientByName(String recipientName) {
-
-        recipientRepository.deleteByName(recipientName);
+       recipientRepository.deleteByName(recipientName);
     }
-
 
 }
