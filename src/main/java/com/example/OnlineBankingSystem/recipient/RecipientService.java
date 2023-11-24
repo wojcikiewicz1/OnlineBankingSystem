@@ -1,7 +1,5 @@
 package com.example.OnlineBankingSystem.recipient;
 
-import com.example.OnlineBankingSystem.user.User;
-import com.example.OnlineBankingSystem.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +31,9 @@ public class RecipientService {
         return recipientRepository.save(recipient);
     }
 
-    public void deleteRecipientByName(String recipientName) {
-       recipientRepository.deleteByName(recipientName);
+    public void deleteRecipientByName(String recipientName, Long id) {
+
+        recipientRepository.deleteByName(recipientName, id);
     }
 
 }

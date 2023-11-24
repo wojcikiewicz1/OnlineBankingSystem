@@ -83,8 +83,8 @@ public class TransactionController {
             return "redirect:/withdraw?error1";
         }
 
-        if ((accountType.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
-                (accountType.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0)) {
+        if ((accountType.equals("Checking Account") && checkingAccount.getBalance().compareTo(amount) < 0) ||
+                (accountType.equals("Savings Account") && savingsAccount.getBalance().compareTo(amount) < 0)) {
             result.hasErrors();
             return "redirect:/withdraw?error2";
         }
@@ -124,8 +124,8 @@ public class TransactionController {
             return "redirect:/betweenAccountsTransfer?error1";
         }
 
-        if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
-                ((transferFrom.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0))) {
+        if ((transferFrom.equals("Checking Account") && checkingAccount.getBalance().compareTo(amount) < 0) ||
+                ((transferFrom.equals("Savings Account") && savingsAccount.getBalance().compareTo(amount) < 0))) {
             result.hasErrors();
             return "redirect:/betweenAccountsTransfer?error2";
         }
@@ -179,8 +179,8 @@ public class TransactionController {
             return "redirect:/regularTransfer?error2";
         }
 
-        if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
-                ((transferFrom.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0))) {
+        if ((transferFrom.equals("Checking Account") && checkingAccount.getBalance().compareTo(amount) < 0) ||
+                ((transferFrom.equals("Savings Account") && savingsAccount.getBalance().compareTo(amount) < 0))) {
             result.hasErrors();
             return "redirect:/regularTransfer?error3";
         }

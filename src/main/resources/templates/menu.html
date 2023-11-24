@@ -30,13 +30,53 @@
         </div>
 
         <div class="card-body">
-            <a th:href="@{/checkingAccount}" class="btn btn-primary" role="button"> Checking Account </a>
-            <a th:href="@{/savingsAccount}" class="btn btn-primary" role="button"> Savings Account </a>
-            <a th:href="@{/deposit}" class="btn btn-primary" role="button"> Deposit </a>
-            <a th:href="@{/withdraw}" class="btn btn-primary" role="button"> Withdraw </a>
-            <a th:href="@{/betweenAccountsTransfer}" class="btn btn-primary" role="button"> Own Transfer </a>
-            <a th:href="@{/regularTransfer}" class="btn btn-primary" role="button"> Regular Transfer </a>
+            <div><a th:href="@{/checkingAccount}" class="btn btn-primary" role="button"> Checking Account </a>
+                <a th:href="@{/savingsAccount}" class="btn btn-primary" role="button"> Savings Account </a>
+            </div>
+            <br>
+            <div>
+                <a th:href="@{/deposit}" class="btn btn-primary" role="button"> Deposit </a>
+                <a th:href="@{/withdraw}" class="btn btn-primary" role="button"> Withdraw </a>
+                <a th:href="@{/betweenAccountsTransfer}" class="btn btn-primary" role="button"> Own Transfer </a>
+                <a th:href="@{/regularTransfer}" class="btn btn-primary" role="button"> Regular Transfer </a>
+            </div>
+
+            <br>
+            <h3>Recent transactions</h3>
+            <div class="table-responsive">
+                <table id="example" class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>Operation Date</th>
+                        <th>Transfer From</th>
+                        <th>Transfer To</th>
+                        <th>Title</th>
+                        <th>Amount</th>
+                        <th>Available Balance</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="checkingAccountTransaction : ${checkingAccountTransactionList}">
+                        <td th:text="${checkingAccountTransaction.operationDate}">...</td>
+                        <td th:text="${checkingAccountTransaction.transferFrom}">...</td>
+                        <td th:text="${checkingAccountTransaction.transferTo}">...</td>
+                        <td th:text="${checkingAccountTransaction.title}">...</td>
+                        <td th:text="${checkingAccountTransaction.amount}">...</td>
+                        <td th:text="${checkingAccountTransaction.availableBalance}">...</td>
+                    </tr>
+                    <tr th:each="savingsAccountTransaction : ${savingsAccountTransactionList}">
+                        <td th:text="${savingsAccountTransaction.operationDate}">...</td>
+                        <td th:text="${savingsAccountTransaction.transferFrom}">...</td>
+                        <td th:text="${savingsAccountTransaction.transferTo}">...</td>
+                        <td th:text="${savingsAccountTransaction.title}">...</td>
+                        <td th:text="${savingsAccountTransaction.amount}">...</td>
+                        <td th:text="${savingsAccountTransaction.availableBalance}">...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+</body>
 </html>

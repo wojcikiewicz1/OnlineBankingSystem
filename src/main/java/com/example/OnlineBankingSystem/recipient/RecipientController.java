@@ -73,12 +73,13 @@ public class RecipientController {
     public String deleteRecipientForm(@RequestParam(value = "recipientName") String recipientName, Model model, Principal principal){
         List<Recipient> recipientList = recipientService.findRecipientList(principal);
 
+        User user = userService.findByUserName(principal.getName());
         Recipient recipient = new Recipient();
 
         model.addAttribute("recipientList", recipientList);
         model.addAttribute("recipient", recipient);
 
-        recipientService.deleteRecipientByName(recipientName);
+        recipientService.deleteRecipientByName(recipientName, user.getId());
 
         return "redirect:/recipient";
     }

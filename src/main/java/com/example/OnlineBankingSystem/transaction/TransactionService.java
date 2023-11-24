@@ -37,7 +37,7 @@ public class TransactionService {
     public void deposit (String accountType, BigDecimal amount, Principal principal) {
         User user = userService.findByUserName(principal.getName());
 
-        if (accountType.equals("Checking")) {
+        if (accountType.equals("Checking Account")) {
             CheckingAccount checkingAccount = user.getCheckingAccount();
             checkingAccount.setBalance(checkingAccount.getBalance().add(amount));
             checkingAccountRepository.save(checkingAccount);
@@ -51,7 +51,7 @@ public class TransactionService {
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
-        } else if (accountType.equals("Savings")) {
+        } else if (accountType.equals("Savings Account")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
             savingsAccount.setBalance(savingsAccount.getBalance().add(amount));
             savingsAccountRepository.save(savingsAccount);
@@ -70,7 +70,7 @@ public class TransactionService {
     public void withdraw (String accountType, BigDecimal amount, Principal principal) {
         User user = userService.findByUserName(principal.getName());
 
-        if (accountType.equals("Checking")) {
+        if (accountType.equals("Checking Account")) {
             CheckingAccount checkingAccount = user.getCheckingAccount();
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
@@ -84,7 +84,7 @@ public class TransactionService {
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
-        } else if (accountType.equals("Savings")) {
+        } else if (accountType.equals("Savings Account")) {
             SavingsAccount savingsAccount = user.getSavingsAccount();
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
@@ -102,7 +102,7 @@ public class TransactionService {
 
     public void betweenAccountsTransfer (String transferFrom, String transferTo, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
 
-        if (transferFrom.equals("Checking") && transferTo.equals("Savings")) {
+        if (transferFrom.equals("Checking Account") && transferTo.equals("Savings Account")) {
 
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             savingsAccount.setBalance(savingsAccount.getBalance().add(amount));
@@ -128,7 +128,7 @@ public class TransactionService {
             savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
 
-        }else if (transferFrom.equals("Savings") && transferTo.equals("Checking")){
+        }else if (transferFrom.equals("Savings Account") && transferTo.equals("Checking Account")){
 
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             checkingAccount.setBalance(checkingAccount.getBalance().add(amount));
@@ -158,7 +158,7 @@ public class TransactionService {
 
     public void regularTransfer (String transferFrom, Recipient recipient, String title, BigDecimal amount, CheckingAccount checkingAccount, SavingsAccount savingsAccount) throws Exception {
 
-        if (transferFrom.equals("Checking")) {
+        if (transferFrom.equals("Checking Account")) {
 
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
@@ -207,7 +207,7 @@ public class TransactionService {
                 savingsAccountTransactionRepository.save(recipientSavingsTransaction);
             }
 
-        } else if (transferFrom.equals("Savings")) {
+        } else if (transferFrom.equals("Savings Account")) {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
 
