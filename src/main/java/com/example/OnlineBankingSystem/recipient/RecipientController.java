@@ -1,13 +1,19 @@
 package com.example.OnlineBankingSystem.recipient;
 
 
+import com.example.OnlineBankingSystem.account.CheckingAccountRepository;
+import com.example.OnlineBankingSystem.account.SavingsAccountRepository;
 import com.example.OnlineBankingSystem.user.User;
 import com.example.OnlineBankingSystem.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -20,6 +26,12 @@ public class RecipientController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CheckingAccountRepository checkingAccountRepository;
+
+    @Autowired
+    private SavingsAccountRepository savingsAccountRepository;
 
     @GetMapping("/recipient")
     public String showRecipientForm(Model model, Principal principal) {
@@ -34,10 +46,23 @@ public class RecipientController {
     }
 
     @PostMapping("/recipient/save")
-    public String saveRecipientForm(@ModelAttribute("recipient") Recipient recipient, Principal principal) {
+    public String saveRecipientForm(@ModelAttribute("recipient") Recipient recipient, Principal principal, BindingResult result) {
 
-        User existingUser = userService.findByUserName(principal.getName());
-        recipient.setUser(existingUser);
+        User user = userService.findByUserName(principal.getName());
+        recipient.setUser(user);
+
+        if ((checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber()) != null && savingsAccountRepository.findByAccountNumber(recipient.getAccountNumber()) == null) ||
+                (checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber()) == null && savingsAccountRepository.findByAccountNumber(recipient.getAccountNumber()) != null)){
+        } else {
+            result.hasErrors();
+            return "redirect:/recipient?error";
+        }
+
+        if (recipient.getAccountNumber() == user.getSavingsAccount().getAccountNumber() || recipient.getAccountNumber() == user.getCheckingAccount().getAccountNumber()) {
+            result.hasErrors();
+            return "redirect:/recipient?error1";
+        }
+
         recipientService.saveRecipient(recipient);
 
         return "redirect:/recipient";

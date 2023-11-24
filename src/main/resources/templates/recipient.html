@@ -31,12 +31,16 @@
 
         <div class="card-body">
 
-            <form
-                    method="post"
-                    role="form"
-                    th:action="@{/recipient/save}"
-                    th:object="${recipient}"
-            >
+            <div th:if="${param.error}">
+                <div class="alert alert-info"> User with such account number does not exist!!!</div>
+            </div>
+
+            <div th:if="${param.error1}">
+                <div class="alert alert-info"> You can not be your own recipient!!! <br> If you want to transfer money through your accounts, <br> please move to "own transfer" section.</div>
+            </div>
+
+            <form method="post" role="form" th:action="@{/recipient/save}" th:object="${recipient}">
+
                 <div class="form-group mb-3">
                     <label class="form-label">Name</label>
                     <input
@@ -57,8 +61,8 @@
                             id="accountNumber"
                             name="accountNumber"
                             placeholder="Enter account number"
-                            th:field="*{accountNumber}"
-                            type="text"
+                            th:value="*{accountNumber}"
+                            type="number"
                             required="required"
                     />
                 </div>

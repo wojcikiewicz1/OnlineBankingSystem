@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -31,6 +33,10 @@ public class AccountController {
 
         model.addAttribute("checkingAccount", checkingAccount);
         model.addAttribute("checkingAccountTransactionList", checkingAccountTransactionList);
+
+        Comparator<CheckingAccountTransaction> comparator = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
+        Collections.sort(checkingAccountTransactionList, comparator);
+
         return "checkingAccount";
     }
 
@@ -43,6 +49,10 @@ public class AccountController {
 
         model.addAttribute("savingsAccount", savingsAccount);
         model.addAttribute("savingsAccountTransactionList", savingsAccountTransactionList);
+
+        Comparator<SavingsAccountTransaction> comparator = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
+        Collections.sort(savingsAccountTransactionList, comparator);
+
         return "savingsAccount";
     }
 }

@@ -31,7 +31,15 @@
             </div>
 
             <div th:if="${param.error1}">
+                <div class="alert alert-info"> Please select the account type!!!</div>
+            </div>
+
+            <div th:if="${param.error2}">
                 <div class="alert alert-info"> There are not that many funds in the account!!!</div>
+            </div>
+
+            <div th:if="${param.error3}">
+                <div class="alert alert-info"> You can not transfer money from and to the same account!!!</div>
             </div>
 
             <form th:action="@{/betweenAccountsTransfer/save}" method="post">

@@ -52,13 +52,7 @@ public class TransactionController {
 
         if (accountType.isEmpty()) {
             result.hasErrors();
-            return "redirect:/withdraw?error1";
-        }
-
-        //??????????????????????????????????????
-        if (amount == null) {
-            result.hasErrors();
-            return "redirect:/withdraw?error3";
+            return "redirect:/deposit?error1";
         }
 
         transactionService.deposit(accountType, amount, principal);
@@ -93,12 +87,6 @@ public class TransactionController {
                 (accountType.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0)) {
             result.hasErrors();
             return "redirect:/withdraw?error2";
-        }
-
-        //??????????????????????????????????????
-        if (amount == null) {
-            result.hasErrors();
-            return "redirect:/withdraw?error3";
         }
 
         transactionService.withdraw(accountType, amount, principal);
@@ -142,6 +130,11 @@ public class TransactionController {
             return "redirect:/betweenAccountsTransfer?error2";
         }
 
+        if(transferFrom.equals(transferTo)) {
+            result.hasErrors();
+            return "redirect:/betweenAccountsTransfer?error3";
+        }
+
         transactionService.betweenAccountsTransfer(transferFrom, transferTo, title, amount, checkingAccount, savingsAccount);
 
         return "redirect:/successoperation";
@@ -165,13 +158,32 @@ public class TransactionController {
                                   @ModelAttribute("recipientName") String recipientName,
                                   @ModelAttribute("title") String title,
                                   @ModelAttribute("amount") BigDecimal amount,
-                                  Principal principal) throws Exception {
-
+                                  Principal principal, BindingResult result) throws Exception {
 
         User user = userService.findByUserName(principal.getName());
         CheckingAccount checkingAccount = user.getCheckingAccount();
         SavingsAccount savingsAccount = user.getSavingsAccount();
 
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            result.hasErrors();
+            return "redirect:/regularTransfer?error";
+        }
+
+        if (transferFrom.isEmpty()) {
+            result.hasErrors();
+            return "redirect:/regularTransfer?error1";
+        }
+
+        if (recipientName.isEmpty()) {
+            result.hasErrors();
+            return "redirect:/regularTransfer?error2";
+        }
+
+        if ((transferFrom.equals("Checking") && checkingAccount.getBalance().compareTo(amount) < 0) ||
+                ((transferFrom.equals("Savings") && savingsAccount.getBalance().compareTo(amount) < 0))) {
+            result.hasErrors();
+            return "redirect:/regularTransfer?error3";
+        }
 
         Recipient recipient = recipientService.findRecipientByName(recipientName, user.getId());
         transactionService.regularTransfer(transferFrom, recipient, title, amount, checkingAccount, savingsAccount);

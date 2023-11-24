@@ -35,11 +35,7 @@
             </div>
 
             <div th:if="${param.error2}">
-                <div class="alert alert-info"> There are not that many funds in the account!!!</div>
-            </div>
-
-            <div th:if="${param.error3}">
-                <div class="alert alert-info"> You must enter the amount!!!</div>
+                <div class="alert alert-info"> Insufficient funds in the account!!!</div>
             </div>
 
             <form th:action="@{/withdraw/save}" method="post">
