@@ -1,7 +1,6 @@
 package com.example.OnlineBankingSystem.transaction;
 
 import com.example.OnlineBankingSystem.account.CheckingAccount;
-import com.example.OnlineBankingSystem.account.CheckingAccountRepository;
 import com.example.OnlineBankingSystem.account.SavingsAccount;
 import com.example.OnlineBankingSystem.account.SavingsAccountRepository;
 import com.example.OnlineBankingSystem.recipient.Recipient;

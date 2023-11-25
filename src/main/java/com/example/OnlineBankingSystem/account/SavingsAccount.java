@@ -1,7 +1,6 @@
 package com.example.OnlineBankingSystem.account;
 
 import com.example.OnlineBankingSystem.transaction.SavingsAccountTransaction;
-import com.example.OnlineBankingSystem.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

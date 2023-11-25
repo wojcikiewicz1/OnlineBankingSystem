@@ -12,17 +12,11 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/menu}">wBANK</a></div>
+    <div class="float-right"><a class="navbar-brand float-right p-2" th:href="@{/logout}">Logout</a></div>
 </nav>
+<br>
 <div class="container main">
     <div class="row">
         <div class="col-md-6 offset-md-3">

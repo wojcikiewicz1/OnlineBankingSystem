@@ -1,6 +1,6 @@
 package com.example.OnlineBankingSystem.user;
 
-import com.example.OnlineBankingSystem.account.*;
+import com.example.OnlineBankingSystem.account.AccountService;
 import com.example.OnlineBankingSystem.role.Role;
 import com.example.OnlineBankingSystem.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;

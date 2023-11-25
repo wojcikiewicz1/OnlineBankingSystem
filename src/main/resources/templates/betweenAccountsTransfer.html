@@ -11,35 +11,29 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/menu}">wBANK</a></div>
+    <div class="float-right"><a class="navbar-brand float-right p-2" th:href="@{/logout}">Logout</a></div>
 </nav>
+<br>
 <div class="container main">
     <div class="row">
         <div class="col-md-6 offset-md-3">
 
             <div th:if="${param.error}">
-                <div class="alert alert-info"> The amount must be greater than zero!!!</div>
+                <div class="alert alert-warning d-flex justify-content-center"> The amount must be greater than zero!!!</div>
             </div>
 
             <div th:if="${param.error1}">
-                <div class="alert alert-info"> Please select the account type!!!</div>
+                <div class="alert alert-warning d-flex justify-content-center"> Please select the account type!!!</div>
             </div>
 
             <div th:if="${param.error2}">
-                <div class="alert alert-info"> There are not that many funds in the account!!!</div>
+                <div class="alert alert-warning d-flex justify-content-center"> There are not that many funds in the account!!!</div>
             </div>
 
             <div th:if="${param.error3}">
-                <div class="alert alert-info"> You can not transfer money from and to the same account!!!</div>
+                <div class="alert alert-warning d-flex justify-content-center"> You can not transfer money from and to the same account!!!</div>
             </div>
 
             <form th:action="@{/betweenAccountsTransfer/save}" method="post">

@@ -11,17 +11,11 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/menu}">wBANK</a></div>
+    <div class="float-right"><a class="navbar-brand float-right p-2" th:href="@{/logout}">Logout</a></div>
 </nav>
+<br>
 <div class="container main">
     <div class="row col-md-8 offset-md-2">
 
@@ -32,11 +26,11 @@
         <div class="card-body">
 
             <div th:if="${param.error}">
-                <div class="alert alert-info"> User with such account number does not exist!!!</div>
+                <div class="alert alert-warning"> User with such account number does not exist!!!</div>
             </div>
 
             <div th:if="${param.error1}">
-                <div class="alert alert-info"> You can not be your own recipient!!! <br> If you want to transfer money through your accounts, <br> please move to "own transfer" section.</div>
+                <div class="alert alert-warning"> You can not be your own recipient!!! <br> If you want to transfer money through your accounts, <br> please move to "own transfer" section.</div>
             </div>
 
             <form method="post" role="form" th:action="@{/recipient/save}" th:object="${recipient}">

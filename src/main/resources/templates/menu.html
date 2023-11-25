@@ -11,34 +11,23 @@
           crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/menu}">wBANK</a></div>
+    <div class="float-right"><a class="navbar-brand float-right p-2" th:href="@{/logout}">Logout</a></div>
 </nav>
+<br>
 <div class="container main">
     <div class="row col-md-8 offset-md-2">
-
-        <div class="card-header">
-            <h3>MENU</h3>
-        </div>
-
         <div class="card-body">
-            <div><a th:href="@{/checkingAccount}" class="btn btn-primary" role="button"> Checking Account </a>
-                <a th:href="@{/savingsAccount}" class="btn btn-primary" role="button"> Savings Account </a>
+            <div class="d-flex justify-content-center"><a th:href="@{/checkingAccount}" class="btn btn-primary m-2 p-2"  role="button"> Checking Account </a>
+                <a th:href="@{/savingsAccount}" class="btn btn-primary m-2 p-2" role="button"> Savings Account </a>
             </div>
             <br>
-            <div>
-                <a th:href="@{/deposit}" class="btn btn-primary" role="button"> Deposit </a>
-                <a th:href="@{/withdraw}" class="btn btn-primary" role="button"> Withdraw </a>
-                <a th:href="@{/betweenAccountsTransfer}" class="btn btn-primary" role="button"> Own Transfer </a>
-                <a th:href="@{/regularTransfer}" class="btn btn-primary" role="button"> Regular Transfer </a>
+            <div class="d-flex justify-content-center">
+                <a th:href="@{/deposit}" class="btn btn-primary m-2 p-2" role="button"> Deposit </a>
+                <a th:href="@{/withdraw}" class="btn btn-primary m-2 p-2" role="button"> Withdraw </a>
+                <a th:href="@{/betweenAccountsTransfer}" class="btn btn-primary m-2 p-2" role="button"> Own Transfer </a>
+                <a th:href="@{/regularTransfer}" class="btn btn-primary m-2 p-2" role="button"> Regular Transfer </a>
             </div>
 
             <br>
