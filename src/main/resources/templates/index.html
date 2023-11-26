@@ -4,22 +4,19 @@
 >
 <head>
     <meta charset="UTF-8">
-    <title>WBank</title>
+    <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
 </head>
 <body>
-<h1>Hello in WBANK.</h1>
+<div class="d-flex justify-content-center"><h1>Hello in wBANK</h1></div>
 
-<div>
-    <button type="submit"><a th:href="@{/login}">Log in</a></button>
-</div>
-
-<div>
-    <button type="submit"><a th:href="@{/register}">Register/Signup here</a></button>
-
+<br>
+<div class="d-flex justify-content-center">
+    <a th:href="@{/login}" class="btn btn-primary m-2 p-2" role="button"> Login </a>
+    <a th:href="@{/register}" class="btn btn-primary m-2 p-2" role="button"> Register/Signup here </a>
 </div>
 
 </body>

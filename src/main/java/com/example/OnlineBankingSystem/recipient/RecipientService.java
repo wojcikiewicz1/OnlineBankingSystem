@@ -27,12 +27,10 @@ public class RecipientService {
     }
 
     public Recipient saveRecipient(Recipient recipient) {
-
         return recipientRepository.save(recipient);
     }
 
     public void deleteRecipientByName(String recipientName, Long id) {
-
         recipientRepository.deleteByName(recipientName, id);
     }
 

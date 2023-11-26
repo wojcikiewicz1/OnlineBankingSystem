@@ -30,6 +30,9 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @GetMapping("/index")
     public String home() {
         return "index";
@@ -64,9 +67,6 @@ public class AuthController {
         userService.saveUser(user);
         return "redirect:/register?success";
     }
-
-    @Autowired
-    private TransactionService transactionService;
 
     @GetMapping("/menu")
     public String menu(Model model, Principal principal) {

@@ -45,7 +45,7 @@ public class TransactionService {
             CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
             checkingAccountTransaction.setCheckingAccount(checkingAccount);
             checkingAccountTransaction.setTransferFrom("-");
-            checkingAccountTransaction.setTransferTo("-");
+            checkingAccountTransaction.setTransferTo("Checking Account");
             checkingAccountTransaction.setTitle("deposit");
             checkingAccountTransaction.setAmount(amount);
             checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
@@ -59,7 +59,7 @@ public class TransactionService {
             SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
             savingsAccountTransaction.setSavingsAccount(savingsAccount);
             savingsAccountTransaction.setTransferFrom("-");
-            savingsAccountTransaction.setTransferTo("-");
+            savingsAccountTransaction.setTransferTo("Savings Account");
             savingsAccountTransaction.setTitle("deposit");
             savingsAccountTransaction.setAmount(amount);
             savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
@@ -77,7 +77,7 @@ public class TransactionService {
 
             CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
             checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom("-");
+            checkingAccountTransaction.setTransferFrom("Checking Account");
             checkingAccountTransaction.setTransferTo("-");
             checkingAccountTransaction.setTitle("withdraw");
             checkingAccountTransaction.setAmount(amount);
@@ -91,7 +91,7 @@ public class TransactionService {
 
             SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
             savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom("-");
+            savingsAccountTransaction.setTransferFrom("Savings Account");
             savingsAccountTransaction.setTransferTo("-");
             savingsAccountTransaction.setTitle("withdraw");
             savingsAccountTransaction.setAmount(amount);

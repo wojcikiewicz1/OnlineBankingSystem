@@ -20,7 +20,6 @@ import java.util.Date;
 @Table(name="checkingAccountTransactions")
 public class CheckingAccountTransaction {
 
-    //AUTO
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -16,11 +16,10 @@ public class AccountService {
     private SavingsAccountRepository savingsAccountRepository;
 
     Random random = new Random();
-    int upperbound = 10000;
 
     public CheckingAccount createCheckingAccount() {
         CheckingAccount checkingAccount = new CheckingAccount();
-        checkingAccount.setAccountNumber(random.nextInt(upperbound));
+        checkingAccount.setAccountNumber(random.nextInt(9998 + 1 - 1000) + 1000);
         checkingAccount.setBalance(new BigDecimal(0.00));
 
         checkingAccountRepository.save(checkingAccount);
@@ -30,7 +29,7 @@ public class AccountService {
 
     public SavingsAccount createSavingsAccount() {
         SavingsAccount SavingsAccount = new SavingsAccount();
-        SavingsAccount.setAccountNumber(random.nextInt(upperbound));
+        SavingsAccount.setAccountNumber(random.nextInt(9998 + 1 - 1000) + 1000);
         SavingsAccount.setBalance(new BigDecimal(0.00));
 
         savingsAccountRepository.save(SavingsAccount);
