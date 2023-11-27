@@ -20,6 +20,9 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Controller
 public class AuthController {
@@ -73,23 +76,18 @@ public class AuthController {
         User user = userService.findByUserName(principal.getName());
 
         CheckingAccount checkingAccount = user.getCheckingAccount();
+        SavingsAccount savingsAccount = user.getSavingsAccount();
 
         List<CheckingAccountTransaction> checkingAccountTransactionList = transactionService.findCheckingAccountTransactionList(principal.getName());
+        List<SavingsAccountTransaction> savingsAccountTransactionList = transactionService.findSavingsAccountTransactionList(principal.getName());
 
         model.addAttribute("checkingAccount", checkingAccount);
         model.addAttribute("checkingAccountTransactionList", checkingAccountTransactionList);
-
-        Comparator<CheckingAccountTransaction> comparator = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
-        Collections.sort(checkingAccountTransactionList, comparator);
-
-
-        SavingsAccount savingsAccount = user.getSavingsAccount();
-
-        List<SavingsAccountTransaction> savingsAccountTransactionList = transactionService.findSavingsAccountTransactionList(principal.getName());
-
         model.addAttribute("savingsAccount", savingsAccount);
         model.addAttribute("savingsAccountTransactionList", savingsAccountTransactionList);
 
+        Comparator<CheckingAccountTransaction> comparator = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
+        Collections.sort(checkingAccountTransactionList, comparator);
         Comparator<SavingsAccountTransaction> comparator2 = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
         Collections.sort(savingsAccountTransactionList, comparator2);
         return "menu";

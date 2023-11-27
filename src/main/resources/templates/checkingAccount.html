@@ -29,6 +29,14 @@
             </div>
 
             <br>
+            <h2>Your checking account number: </h2>
+            <br>
+
+            <div class="col-xs-6 text-right">
+                <h2><i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${checkingAccount.accountNumber}"> $</span></h2>
+            </div>
+
+            <br>
 
             <div class="form-group mb-3">
                 <a th:href="@{/menu}" class="btn btn-primary" role="button"> Back To Menu </a>
@@ -49,7 +57,10 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="checkingAccountTransaction : ${checkingAccountTransactionList}">
+                    <tr th:each="checkingAccountTransaction : ${checkingAccountTransactionList}" th:style="${checkingAccountTransaction.transferTo == 'Checking Account'}
+                                                                                                           ? 'color: #3dba06'
+                                                                                                           :(${checkingAccountTransaction.transferFrom == 'Checking Account'}
+                                                                                                           ? 'color: #f71622') ">
                             <td th:text="${checkingAccountTransaction.operationDate}">...</td>
                             <td th:text="${checkingAccountTransaction.transferFrom}">...</td>
                             <td th:text="${checkingAccountTransaction.transferTo}">...</td>

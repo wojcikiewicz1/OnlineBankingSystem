@@ -29,6 +29,14 @@
             </div>
 
             <br>
+            <h2>Your savings account number: </h2>
+            <br>
+
+            <div class="col-xs-6 text-right">
+                <h2><i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${savingsAccount.accountNumber}"> $</span></h2>
+            </div>
+
+            <br>
 
             <div class="form-group mb-3">
                 <a th:href="@{/menu}" class="btn btn-primary" role="button"> Back To Menu </a>
@@ -49,7 +57,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="savingsAccountTransaction : ${savingsAccountTransactionList}">
+                        <tr th:each="savingsAccountTransaction : ${savingsAccountTransactionList}" th:style="${savingsAccountTransaction.transferTo == 'Savings Account'}
+                                                                                                           ? 'color: #3dba06'
+                                                                                                           :(${savingsAccountTransaction.transferFrom == 'Savings Account'}
+                                                                                                           ? 'color: #f71622') ">
                             <td th:text="${savingsAccountTransaction.operationDate}">...</td>
                             <td th:text="${savingsAccountTransaction.transferFrom}">...</td>
                             <td th:text="${savingsAccountTransaction.transferTo}">...</td>
