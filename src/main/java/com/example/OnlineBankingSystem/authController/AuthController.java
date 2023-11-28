@@ -93,6 +93,20 @@ public class AuthController {
         return "menu";
     }
 
+    @GetMapping ("/profile")
+    public String profile(Model model, Principal principal) {
+        User user = userService.findByUserName(principal.getName());
+
+        CheckingAccount checkingAccount = user.getCheckingAccount();
+        SavingsAccount savingsAccount = user.getSavingsAccount();
+
+        model.addAttribute("user", user);
+        model.addAttribute("checkingAccount", checkingAccount);
+        model.addAttribute("savingsAccount", savingsAccount);
+
+        return "profile";
+    }
+
     @GetMapping ("/successoperation")
     public String successoperation() {
         return "successoperation";

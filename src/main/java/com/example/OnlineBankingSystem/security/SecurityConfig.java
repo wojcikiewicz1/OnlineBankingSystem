@@ -39,6 +39,7 @@ public class SecurityConfig {
                                 .requestMatchers("/regularTransfer/**").authenticated()
                                 .requestMatchers("/recipient/**").authenticated()
                                 .requestMatchers("/successoperation").authenticated()
+                                .requestMatchers("/profile").authenticated()
 
                 ).formLogin(
                         form -> form
