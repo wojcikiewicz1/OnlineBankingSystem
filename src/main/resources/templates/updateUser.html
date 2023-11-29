@@ -11,23 +11,25 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<nav class="navbar navbar-dark bg-dark">
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/menu}">wBANK</a></div>
+    <div class="float-left"><a class="navbar-brand p-2" th:href="@{/profile}">Profile</a></div>
+    <div class="float-right"><a class="navbar-brand float-right p-2" th:href="@{/logout}">Logout</a></div>
+</nav>
+<br>
+<div class="container main">
     <div class="row col-md-8 offset-md-2">
         <div class="card">
-
             <div class="card-header">
-                <h2 class="text-center">Registration</h2>
+                <h2 class="text-center">Update your data.</h2>
+                <p class="text-center"> After a successful update, you will be logged out.</p>
             </div>
-            <div th:if="${param.success}">
-                <div class="alert alert-info">
-                    You have successfully registered to our bank!
-                </div>
-            </div>
+
             <div class="card-body">
                 <form
                         method="post"
                         role="form"
-                        th:action="@{/register/save}"
+                        th:action="@{updateUser}"
                         th:object="${user}"
                 >
                     <div class="form-group mb-3">
@@ -43,19 +45,6 @@
                         />
                         <p th:errors = "*{username}" class="text-danger"
                            th:if="${#fields.hasErrors('username')}"></p>
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label class="form-label">Password</label>
-                        <input
-                                class="form-control"
-                                id="password"
-                                name="password"
-                                placeholder="Enter password"
-                                th:field="*{password}"
-                                type="password"
-                                required="required"
-                        />
                     </div>
 
                     <div class="form-group mb-3">
@@ -100,8 +89,8 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-primary" type="submit">Register</button>
-                        <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                        <button class="btn btn-primary" type="submit">Update</button>
+                        <a th:href="@{profile}" class="btn btn-primary" role="button"> Return</a>
                     </div>
                 </form>
             </div>

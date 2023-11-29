@@ -20,9 +20,6 @@ import java.security.Principal;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public class AuthController {
@@ -57,9 +54,14 @@ public class AuthController {
     public String registration(@ModelAttribute("user")User user, Model model, BindingResult result) {
 
         User existingUser = userRepository.findByUsername(user.getUsername());
+        User existingUser1 = userRepository.findByEmail(user.getEmail());
 
         if(existingUser != null && existingUser.getUsername() != null && !existingUser.getUsername().isEmpty()){
-            result.rejectValue("email", null, "There is already an account registered with the same username");
+            result.rejectValue("username", null, "There is already an account registered with the same username");
+        }
+
+        if(existingUser1 != null && existingUser1.getEmail() != null && !existingUser1.getEmail().isEmpty()){
+            result.rejectValue("email", null, "There is already an account registered with the same email");
         }
 
         if(result.hasErrors()){
@@ -91,25 +93,6 @@ public class AuthController {
         Comparator<SavingsAccountTransaction> comparator2 = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
         Collections.sort(savingsAccountTransactionList, comparator2);
         return "menu";
-    }
-
-    @GetMapping ("/profile")
-    public String profile(Model model, Principal principal) {
-        User user = userService.findByUserName(principal.getName());
-
-        CheckingAccount checkingAccount = user.getCheckingAccount();
-        SavingsAccount savingsAccount = user.getSavingsAccount();
-
-        model.addAttribute("user", user);
-        model.addAttribute("checkingAccount", checkingAccount);
-        model.addAttribute("savingsAccount", savingsAccount);
-
-        return "profile";
-    }
-
-    @GetMapping ("/successoperation")
-    public String successoperation() {
-        return "successoperation";
     }
 
     @GetMapping ("/logout")

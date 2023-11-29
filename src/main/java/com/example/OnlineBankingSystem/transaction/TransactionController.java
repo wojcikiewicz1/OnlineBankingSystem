@@ -190,4 +190,10 @@ public class TransactionController {
         return "redirect:/successoperation";
     }
 
+    @GetMapping ("/successoperation")
+    public String successoperation() {
+        return "successoperation";
+    }
+
+
 }

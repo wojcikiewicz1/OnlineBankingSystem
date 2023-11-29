@@ -54,4 +54,11 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public void updateUser (User user) {
+        userRepository.save(user);
+    }
+
+    public void changePassword (User user) {
+        userRepository.save(user);
+    }
 }

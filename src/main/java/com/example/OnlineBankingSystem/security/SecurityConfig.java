@@ -40,7 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers("/recipient/**").authenticated()
                                 .requestMatchers("/successoperation").authenticated()
                                 .requestMatchers("/profile").authenticated()
-
+                                .requestMatchers("/updateUser").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

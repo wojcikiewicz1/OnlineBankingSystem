@@ -191,7 +191,7 @@ public class TransactionService {
                 checkingAccountTransactionRepository.save(recipientCheckingTransaction);
 
 
-            } else if (recipientSavingsAccount != null &&recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
+            } else if (recipientSavingsAccount != null && recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
                 recipientSavingsAccount.setBalance(recipientSavingsAccount.getBalance().add(amount));
                 savingsAccountRepository.save(recipientSavingsAccount);
 

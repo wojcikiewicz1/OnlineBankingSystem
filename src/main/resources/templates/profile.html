@@ -23,36 +23,37 @@
             <br>
             <h4>Your username: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${user.username}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${user.username}"> $</span>
             </div>
             <br>
             <h4>Your email: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${user.email}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${user.email}"> $</span>
             </div>
             <br>
             <h4>Your first name: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${user.firstName}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${user.firstName}"> $</span>
             </div>
             <br>
             <h4>Your last name: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${user.lastName}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${user.lastName}"> $</span>
             </div>
             <br>
             <h4>Your checking account number: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${checkingAccount.accountNumber}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${checkingAccount.accountNumber}"> $</span>
             </div>
             <br>
             <h4>Your savings account number: </h4>
             <div class="col-xs-6 text-right">
-                <i class="fa fa-usd" aria-hidden="true"></i> <span th:text="${savingsAccount.accountNumber}"> $</span>
+                <p class="fa fa-usd" aria-hidden="true"></p> <span th:text="${savingsAccount.accountNumber}"> $</span>
             </div>
             <br>
             <div class="form-group mb-3">
                 <a th:href="@{/menu}" class="btn btn-primary" role="button"> Back To Menu </a>
+                <a th:href="@{updateUser}" class="btn btn-primary" role="button"> Update data</a>
             </div>
 
 
