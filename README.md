@@ -6,15 +6,6 @@ withdraw money. It is posibble to make transactions between our checking and sav
 other clients. User can tracked history of transfers, add and delete users to his list of recipients and change his
 data. App is secured by Spring Security to ensure data protection and user authentication.
 
-
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
-
-
 ## Tech Stack
 
 **Backend:** 
