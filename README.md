@@ -9,6 +9,7 @@ data. App is secured by Spring Security to ensure data protection and user authe
 ## Tech Stack
 
 **Backend:** 
+- Java
 - Spring Boot 
 - Spring Web 
 - Spring Data 
