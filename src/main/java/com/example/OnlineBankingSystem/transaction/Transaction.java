@@ -1,7 +1,5 @@
 package com.example.OnlineBankingSystem.transaction;
 
-import com.example.OnlineBankingSystem.account.SavingsAccount;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity
-@Table(name="savingsAccountTransactions")
-public class SavingsAccountTransaction extends Transaction{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Transaction {
 
     private String transferFrom;
     private String transferTo;
@@ -31,9 +23,4 @@ public class SavingsAccountTransaction extends Transaction{
     @CreationTimestamp
     private Date operationDate;
     private BigDecimal availableBalance;
-
-    @ManyToOne
-    @JoinColumn(name = "savings_account_id")
-    private SavingsAccount savingsAccount;
-
 }

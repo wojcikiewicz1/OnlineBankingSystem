@@ -18,7 +18,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="checkingAccountTransactions")
-public class CheckingAccountTransaction {
+public class CheckingAccountTransaction extends Transaction{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

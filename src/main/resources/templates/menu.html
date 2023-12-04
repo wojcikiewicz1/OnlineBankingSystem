@@ -31,7 +31,6 @@
                 <a th:href="@{/regularTransfer}" class="btn btn-primary m-2 p-2" role="button"> Regular Transfer </a>
             </div>
 
-            <br>
             <h3>Recent transactions</h3>
             <div class="table-responsive">
                 <table id="example" class="table table-bordered table-hover table-striped">
@@ -46,21 +45,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="checkingAccountTransaction : ${checkingAccountTransactionList}">
-                        <td th:text="${checkingAccountTransaction.operationDate}">...</td>
-                        <td th:text="${checkingAccountTransaction.transferFrom}">...</td>
-                        <td th:text="${checkingAccountTransaction.transferTo}">...</td>
-                        <td th:text="${checkingAccountTransaction.title}">...</td>
-                        <td th:text="${checkingAccountTransaction.amount}">...</td>
-                        <td th:text="${checkingAccountTransaction.availableBalance}">...</td>
-                    </tr>
-                    <tr th:each="savingsAccountTransaction : ${savingsAccountTransactionList}">
-                        <td th:text="${savingsAccountTransaction.operationDate}">...</td>
-                        <td th:text="${savingsAccountTransaction.transferFrom}">...</td>
-                        <td th:text="${savingsAccountTransaction.transferTo}">...</td>
-                        <td th:text="${savingsAccountTransaction.title}">...</td>
-                        <td th:text="${savingsAccountTransaction.amount}">...</td>
-                        <td th:text="${savingsAccountTransaction.availableBalance}">...</td>
+                    <tr th:each="transaction : ${transactionList}">
+                        <td th:text="${transaction.operationDate}">...</td>
+                        <td th:text="${transaction.transferFrom}">...</td>
+                        <td th:text="${transaction.transferTo}">...</td>
+                        <td th:text="${transaction.title}">...</td>
+                        <td th:text="${transaction.amount}">...</td>
+                        <td th:text="${transaction.availableBalance}">...</td>
                     </tr>
                     </tbody>
                 </table>

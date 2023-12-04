@@ -4,6 +4,7 @@ import com.example.OnlineBankingSystem.account.CheckingAccount;
 import com.example.OnlineBankingSystem.account.SavingsAccount;
 import com.example.OnlineBankingSystem.transaction.CheckingAccountTransaction;
 import com.example.OnlineBankingSystem.transaction.SavingsAccountTransaction;
+import com.example.OnlineBankingSystem.transaction.Transaction;
 import com.example.OnlineBankingSystem.transaction.TransactionService;
 import com.example.OnlineBankingSystem.user.User;
 import com.example.OnlineBankingSystem.user.UserRepository;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -83,15 +84,17 @@ public class AuthController {
         List<CheckingAccountTransaction> checkingAccountTransactionList = transactionService.findCheckingAccountTransactionList(principal.getName());
         List<SavingsAccountTransaction> savingsAccountTransactionList = transactionService.findSavingsAccountTransactionList(principal.getName());
 
-        model.addAttribute("checkingAccount", checkingAccount);
-        model.addAttribute("checkingAccountTransactionList", checkingAccountTransactionList);
-        model.addAttribute("savingsAccount", savingsAccount);
-        model.addAttribute("savingsAccountTransactionList", savingsAccountTransactionList);
+        List<Transaction> transactionList = new ArrayList<>();
+        transactionList.addAll(checkingAccountTransactionList);
+        transactionList.addAll(savingsAccountTransactionList);
 
-        Comparator<CheckingAccountTransaction> comparator = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
-        Collections.sort(checkingAccountTransactionList, comparator);
-        Comparator<SavingsAccountTransaction> comparator2 = (t1, t2) -> Integer.valueOf((int) t2.getOperationDate().getTime()).compareTo((int) t1.getOperationDate().getTime());
-        Collections.sort(savingsAccountTransactionList, comparator2);
+        Comparator<Transaction> comparator = Comparator.comparing(Transaction::getOperationDate);
+        transactionList.sort(comparator.reversed());
+
+        model.addAttribute("checkingAccount", checkingAccount);
+        model.addAttribute("savingsAccount", savingsAccount);
+        model.addAttribute("transactionList", transactionList);
+
         return "menu";
     }
 
