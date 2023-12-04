@@ -36,4 +36,14 @@ public class SavingsAccountTransaction extends Transaction{
     @JoinColumn(name = "savings_account_id")
     private SavingsAccount savingsAccount;
 
+    public SavingsAccountTransaction(SavingsAccount savingsAccount, String transferFrom, String transferTo,
+                                     String title, BigDecimal amount) {
+        this.savingsAccount = savingsAccount;
+        this.transferFrom = transferFrom;
+        this.transferTo = transferTo;
+        this.title = title;
+        this.amount = amount;
+        this.availableBalance = savingsAccount.getBalance();
+    }
+
 }

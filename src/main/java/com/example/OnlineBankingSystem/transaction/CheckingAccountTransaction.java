@@ -1,6 +1,7 @@
 package com.example.OnlineBankingSystem.transaction;
 
 import com.example.OnlineBankingSystem.account.CheckingAccount;
+import com.example.OnlineBankingSystem.account.SavingsAccount;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,13 @@ public class CheckingAccountTransaction extends Transaction{
     @JoinColumn(name = "checking_account_id")
     private CheckingAccount checkingAccount;
 
-
-
+    public CheckingAccountTransaction(CheckingAccount checkingAccount, String transferFrom, String transferTo,
+                                     String title, BigDecimal amount) {
+        this.checkingAccount = checkingAccount;
+        this.transferFrom = transferFrom;
+        this.transferTo = transferTo;
+        this.title = title;
+        this.amount = amount;
+        this.availableBalance = checkingAccount.getBalance();
+    }
 }

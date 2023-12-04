@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.security.Principal;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,13 +41,8 @@ public class TransactionService {
             checkingAccount.setBalance(checkingAccount.getBalance().add(amount));
             checkingAccountRepository.save(checkingAccount);
 
-            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
-            checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom("-");
-            checkingAccountTransaction.setTransferTo("Checking Account");
-            checkingAccountTransaction.setTitle("deposit");
-            checkingAccountTransaction.setAmount(amount);
-            checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
+            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction(
+                    checkingAccount, "-", "Checking Account", "deposit", amount);
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
         } else if (accountType.equals("Savings Account")) {
@@ -56,13 +50,8 @@ public class TransactionService {
             savingsAccount.setBalance(savingsAccount.getBalance().add(amount));
             savingsAccountRepository.save(savingsAccount);
 
-            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
-            savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom("-");
-            savingsAccountTransaction.setTransferTo("Savings Account");
-            savingsAccountTransaction.setTitle("deposit");
-            savingsAccountTransaction.setAmount(amount);
-            savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
+            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction(
+                    savingsAccount, "-", "Savings Account", "deposit", amount);
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
         }
     }
@@ -75,13 +64,8 @@ public class TransactionService {
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
 
-            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
-            checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom("Checking Account");
-            checkingAccountTransaction.setTransferTo("-");
-            checkingAccountTransaction.setTitle("withdraw");
-            checkingAccountTransaction.setAmount(amount);
-            checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
+            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction(
+                    checkingAccount, "Checking Account", "-", "withdraw", amount);
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
         } else if (accountType.equals("Savings Account")) {
@@ -89,13 +73,8 @@ public class TransactionService {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
 
-            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
-            savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom("Savings Account");
-            savingsAccountTransaction.setTransferTo("-");
-            savingsAccountTransaction.setTitle("withdraw");
-            savingsAccountTransaction.setAmount(amount);
-            savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
+            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction(
+                    savingsAccount, "Savings Account", "-", "withdraw", amount);
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
         }
     }
@@ -109,48 +88,27 @@ public class TransactionService {
             checkingAccountRepository.save(checkingAccount);
             savingsAccountRepository.save(savingsAccount);
 
-            Date date = new Date();
-            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
-            checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom(transferFrom);
-            checkingAccountTransaction.setTransferTo(transferTo);
-            checkingAccountTransaction.setTitle(title);
-            checkingAccountTransaction.setAmount(amount);
-            checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
+            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction(
+                    checkingAccount, transferFrom, transferTo, title, amount);
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
-            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
-            savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom(transferFrom);
-            savingsAccountTransaction.setTransferTo(transferTo);
-            savingsAccountTransaction.setTitle(title);
-            savingsAccountTransaction.setAmount(amount);
-            savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
+            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction(
+                    savingsAccount, transferFrom, transferTo, title, amount);
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
 
-        }else if (transferFrom.equals("Savings Account") && transferTo.equals("Checking Account")){
+        } else if (transferFrom.equals("Savings Account") && transferTo.equals("Checking Account")){
 
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             checkingAccount.setBalance(checkingAccount.getBalance().add(amount));
             savingsAccountRepository.save(savingsAccount);
             checkingAccountRepository.save(checkingAccount);
 
-            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
-            savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom(transferFrom);
-            savingsAccountTransaction.setTransferTo(transferTo);
-            savingsAccountTransaction.setTitle(title);
-            savingsAccountTransaction.setAmount(amount);
-            savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
+            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction(
+                    savingsAccount, transferFrom, transferTo, title, amount);
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
 
-            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
-            checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom(transferFrom);
-            checkingAccountTransaction.setTransferTo(transferTo);
-            checkingAccountTransaction.setTitle(title);
-            checkingAccountTransaction.setAmount(amount);
-            checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
+            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction(
+                    checkingAccount, transferFrom, transferTo, title, amount);
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
         } else
             throw new Exception();
@@ -163,13 +121,8 @@ public class TransactionService {
             checkingAccount.setBalance(checkingAccount.getBalance().subtract(amount));
             checkingAccountRepository.save(checkingAccount);
 
-            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction();
-            checkingAccountTransaction.setCheckingAccount(checkingAccount);
-            checkingAccountTransaction.setTransferFrom(transferFrom);
-            checkingAccountTransaction.setTransferTo(recipient.getName());
-            checkingAccountTransaction.setTitle(title);
-            checkingAccountTransaction.setAmount(amount);
-            checkingAccountTransaction.setAvailableBalance(checkingAccount.getBalance());
+            CheckingAccountTransaction checkingAccountTransaction = new CheckingAccountTransaction(
+                    checkingAccount, transferFrom, recipient.getName(), title, amount);
             checkingAccountTransactionRepository.save(checkingAccountTransaction);
 
             CheckingAccount recipientCheckingAccount = checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber());
@@ -179,31 +132,18 @@ public class TransactionService {
                 recipientCheckingAccount.setBalance(recipientCheckingAccount.getBalance().add(amount));
                 checkingAccountRepository.save(recipientCheckingAccount);
 
-                CheckingAccountTransaction recipientCheckingTransaction = new CheckingAccountTransaction();
+                CheckingAccountTransaction recipientCheckingTransaction = new CheckingAccountTransaction(
+                        recipientCheckingAccount, recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName(), "Checking Account", title, amount);
                 recipientCheckingAccount.getCheckingAccountTransactionList().add(recipientCheckingTransaction);
-
-                recipientCheckingTransaction.setCheckingAccount(recipientCheckingAccount);
-                recipientCheckingTransaction.setTransferFrom(recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName());
-                recipientCheckingTransaction.setTransferTo("Checking Account");
-                recipientCheckingTransaction.setTitle(title);
-                recipientCheckingTransaction.setAmount(amount);
-                recipientCheckingTransaction.setAvailableBalance(recipientCheckingAccount.getBalance());
                 checkingAccountTransactionRepository.save(recipientCheckingTransaction);
-
 
             } else if (recipientSavingsAccount != null && recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
                 recipientSavingsAccount.setBalance(recipientSavingsAccount.getBalance().add(amount));
                 savingsAccountRepository.save(recipientSavingsAccount);
 
-                SavingsAccountTransaction recipientSavingsTransaction = new SavingsAccountTransaction();
+                SavingsAccountTransaction recipientSavingsTransaction = new SavingsAccountTransaction(
+                        recipientSavingsAccount, recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName(), "Savings Account", title, amount);
                 recipientSavingsAccount.getSavingsAccountTransactionList().add(recipientSavingsTransaction);
-
-                recipientSavingsTransaction.setSavingsAccount(recipientSavingsAccount);
-                recipientSavingsTransaction.setTransferFrom(recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName());
-                recipientSavingsTransaction.setTransferTo("Savings Account");
-                recipientSavingsTransaction.setTitle(title);
-                recipientSavingsTransaction.setAmount(amount);
-                recipientSavingsTransaction.setAvailableBalance(recipientSavingsAccount.getBalance());
                 savingsAccountTransactionRepository.save(recipientSavingsTransaction);
             }
 
@@ -211,13 +151,8 @@ public class TransactionService {
             savingsAccount.setBalance(savingsAccount.getBalance().subtract(amount));
             savingsAccountRepository.save(savingsAccount);
 
-            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction();
-            savingsAccountTransaction.setSavingsAccount(savingsAccount);
-            savingsAccountTransaction.setTransferFrom(transferFrom);
-            savingsAccountTransaction.setTransferTo(recipient.getName());
-            savingsAccountTransaction.setTitle(title);
-            savingsAccountTransaction.setAmount(amount);
-            savingsAccountTransaction.setAvailableBalance(savingsAccount.getBalance());
+            SavingsAccountTransaction savingsAccountTransaction = new SavingsAccountTransaction(
+                    savingsAccount, transferFrom, recipient.getName(), title, amount);
             savingsAccountTransactionRepository.save(savingsAccountTransaction);
 
             CheckingAccount recipientCheckingAccount = checkingAccountRepository.findByAccountNumber(recipient.getAccountNumber());
@@ -227,34 +162,20 @@ public class TransactionService {
                 recipientCheckingAccount.setBalance(recipientCheckingAccount.getBalance().add(amount));
                 checkingAccountRepository.save(recipientCheckingAccount);
 
-                CheckingAccountTransaction recipientCheckingTransaction = new CheckingAccountTransaction();
+                CheckingAccountTransaction recipientCheckingTransaction = new CheckingAccountTransaction(
+                        recipientCheckingAccount, recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName(), "Checking Account", title, amount);
                 recipientCheckingAccount.getCheckingAccountTransactionList().add(recipientCheckingTransaction);
-
-                recipientCheckingTransaction.setCheckingAccount(recipientCheckingAccount);
-                recipientCheckingTransaction.setTransferFrom(recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName());
-                recipientCheckingTransaction.setTransferTo("Checking Account");
-                recipientCheckingTransaction.setTitle(title);
-                recipientCheckingTransaction.setAmount(amount);
-                recipientCheckingTransaction.setAvailableBalance(recipientCheckingAccount.getBalance());
                 checkingAccountTransactionRepository.save(recipientCheckingTransaction);
-
 
             } else if (recipientSavingsAccount != null &&recipient.getAccountNumber() == recipientSavingsAccount.getAccountNumber()) {
                 recipientSavingsAccount.setBalance(recipientSavingsAccount.getBalance().add(amount));
                 savingsAccountRepository.save(recipientSavingsAccount);
 
-                SavingsAccountTransaction recipientSavingsTransaction = new SavingsAccountTransaction();
+                SavingsAccountTransaction recipientSavingsTransaction = new SavingsAccountTransaction(
+                        recipientSavingsAccount, recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName(), "Savings Account", title, amount);
                 recipientSavingsAccount.getSavingsAccountTransactionList().add(recipientSavingsTransaction);
-
-                recipientSavingsTransaction.setSavingsAccount(recipientSavingsAccount);
-                recipientSavingsTransaction.setTransferFrom(recipient.getUser().getFirstName() + " " + recipient.getUser().getLastName());
-                recipientSavingsTransaction.setTransferTo("Savings Account");
-                recipientSavingsTransaction.setTitle(title);
-                recipientSavingsTransaction.setAmount(amount);
-                recipientSavingsTransaction.setAvailableBalance(recipientSavingsAccount.getBalance());
                 savingsAccountTransactionRepository.save(recipientSavingsTransaction);
             }
-
         } else {
             throw new Exception();
         }
