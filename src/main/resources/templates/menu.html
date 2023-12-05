@@ -45,7 +45,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="transaction : ${transactionList}">
+                    <tr th:each="transaction : ${transactionList}"  th:style="${(transaction.transferTo == 'Checking Account' && transaction.transferFrom == 'Savings Account') || (transaction.transferTo == 'Savings Account' && transaction.transferFrom == 'Checking Account')
+                                                                  ? 'color: #063dba'
+                                                                  : (transaction.transferTo == 'Checking Account' || transaction.transferTo == 'Savings Account')
+                                                                  ? 'color: #3dba06'
+                                                                  : (transaction.transferFrom == 'Checking Account' || transaction.transferFrom == 'Savings Account')
+                                                                  ? 'color: #f71622' : ''}">
                         <td th:text="${transaction.operationDate}">...</td>
                         <td th:text="${transaction.transferFrom}">...</td>
                         <td th:text="${transaction.transferTo}">...</td>
