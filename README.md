@@ -29,7 +29,7 @@ data. App is secured by Spring Security to ensure data protection and user authe
 
 To run Online Banking System:
 
-1. Clone project
+Clone project
 ```bash
   git clone https://github.com/wojcikiewicz1/OnlineBankingSystem.git
 
