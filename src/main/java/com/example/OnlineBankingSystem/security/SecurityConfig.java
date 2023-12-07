@@ -41,6 +41,7 @@ public class SecurityConfig {
                                 .requestMatchers("/successoperation").authenticated()
                                 .requestMatchers("/profile").authenticated()
                                 .requestMatchers("/updateUser").authenticated()
+                                .requestMatchers("/changePassword").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

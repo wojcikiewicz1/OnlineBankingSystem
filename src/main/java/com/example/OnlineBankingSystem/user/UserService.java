@@ -4,6 +4,7 @@ import com.example.OnlineBankingSystem.account.AccountService;
 import com.example.OnlineBankingSystem.role.Role;
 import com.example.OnlineBankingSystem.role.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,14 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void changePassword (User user) {
+    public boolean verifyUserPassword(User user, String password) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.matches(password, user.getPassword());
+    }
+
+    public void changePassword (User user, String newPassword) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
     }
 }
