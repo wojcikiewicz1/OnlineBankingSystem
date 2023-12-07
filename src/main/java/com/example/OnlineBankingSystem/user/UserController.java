@@ -97,8 +97,8 @@ public class UserController {
         }
 
         if (!passwordForm.getNewPassword().equals(passwordForm.getConfirmPassword())) {
-            result.rejectValue("newPassword", null, "New password does not equals confirm password.");
-            result.rejectValue("confirmPassword", null, "New password does not equals confirm password.");
+            result.rejectValue("newPassword", null, "Passwords do not match.");
+            result.rejectValue("confirmPassword", null, "Passwords do not match.");
         }
 
         if (result.hasErrors()) {
