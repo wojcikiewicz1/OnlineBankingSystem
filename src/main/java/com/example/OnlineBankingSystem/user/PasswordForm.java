@@ -11,5 +11,4 @@ public class PasswordForm {
     private String currentPassword;
     private String newPassword;
     private String confirmPassword;
-
 }

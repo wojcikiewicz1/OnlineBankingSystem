@@ -10,7 +10,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -45,7 +44,8 @@ public class UserController {
     }
 
     @PostMapping("updateUser")
-    public String updateUser (@ModelAttribute("user") User user,Principal principal, Model model, BindingResult result) {
+    public String updateUser (@ModelAttribute("user") User user,Principal principal,
+                              Model model, BindingResult result) {
 
         User myUser = userService.findByUserName(principal.getName());
 

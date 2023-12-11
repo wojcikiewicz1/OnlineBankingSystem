@@ -25,7 +25,7 @@ public class UserService {
     @Autowired
     private AccountService accountService;
 
-    public void saveUser(User user) {
+    public void saveUser (User user) {
         User user1 = new User();
         user1.setUsername(user.getUsername());
         user1.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -42,16 +42,15 @@ public class UserService {
         }
         user1.setRoles(Arrays.asList(role));
         userRepository.save(user1);
-
     }
 
-    private Role checkRoleExist(){
+    private Role checkRoleExist (){
         Role role = new Role();
         role.setName("USER");
         return roleRepository.save(role);
     }
 
-    public User findByUserName(String username) {
+    public User findByUserName (String username) {
         return userRepository.findByUsername(username);
     }
 
@@ -59,7 +58,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean verifyUserPassword(User user, String password) {
+    public boolean verifyUserPassword (User user, String password) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder.matches(password, user.getPassword());
     }
