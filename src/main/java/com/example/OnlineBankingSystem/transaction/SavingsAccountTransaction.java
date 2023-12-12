@@ -45,5 +45,4 @@ public class SavingsAccountTransaction extends Transaction{
         this.amount = amount;
         this.availableBalance = savingsAccount.getBalance();
     }
-
 }

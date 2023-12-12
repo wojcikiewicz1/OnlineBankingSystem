@@ -14,5 +14,4 @@ public interface RecipientRepository extends JpaRepository<Recipient, Long> {
     @Modifying
     @Query("DELETE FROM Recipient p WHERE p.name = :name AND p.user.id = :id")
     void deleteByName(String name, Long id);
-
 }

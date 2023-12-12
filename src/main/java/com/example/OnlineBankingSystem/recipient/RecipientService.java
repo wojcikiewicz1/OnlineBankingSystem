@@ -33,5 +33,4 @@ public class RecipientService {
     public void deleteRecipientByName(String recipientName, Long id) {
         recipientRepository.deleteByName(recipientName, id);
     }
-
 }

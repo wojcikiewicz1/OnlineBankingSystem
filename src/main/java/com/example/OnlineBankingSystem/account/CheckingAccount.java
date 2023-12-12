@@ -27,5 +27,4 @@ public class CheckingAccount {
 
     @OneToMany(mappedBy = "checkingAccount")
     private List<CheckingAccountTransaction> checkingAccountTransactionList;
-
 }

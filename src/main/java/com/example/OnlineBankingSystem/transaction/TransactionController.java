@@ -194,6 +194,4 @@ public class TransactionController {
     public String successoperation() {
         return "successoperation";
     }
-
-
 }
